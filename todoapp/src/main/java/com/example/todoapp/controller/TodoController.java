@@ -4,6 +4,8 @@ import com.example.todoapp.model.TodoEntry;
 import com.example.todoapp.repository.TodoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,8 @@ public class TodoController {
     private TodoRepository todoRepository;
 
     @GetMapping
-    public List<TodoEntry> getAll() {
-        return todoRepository.findAll();
+    public Page<TodoEntry> getTodos(Pageable pageable) {
+        return todoRepository.findAll(pageable);
     }
 
     @GetMapping("/{id}")
